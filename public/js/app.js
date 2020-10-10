@@ -18,27 +18,25 @@ form.addEventListener("submit", (e) => {
   desc.innerHTML = "";
   loc.innerHTML = "Loading...";
 
-  fetch(`http://localhost:3000/weather?location=${locationInput}`).then(
-    (response) => {
-      response.json().then((data) => {
-        console.log(data);
-        if (data.error) {
-          loc.innerHTML = "";
-          temperature.innerHTML = "";
-          loc.innerHTML = "";
-          feelslike.innerHTML = "";
-          desc.innerHTML = "";
-          err.innerHTML = data.error;
-        } else {
-          loc.innerHTML = data.location;
-          temperature.innerHTML = data.forecastData.temperature + "°C";
-          feelslike.innerHTML =
-            "Feels like " + data.forecastData.feelslike + "°C";
-          desc.innerHTML = data.forecastData.weatherDescription;
-        }
-      });
-    }
-  );
+  fetch(`/weather?location=${locationInput}`).then((response) => {
+    response.json().then((data) => {
+      console.log(data);
+      if (data.error) {
+        loc.innerHTML = "";
+        temperature.innerHTML = "";
+        loc.innerHTML = "";
+        feelslike.innerHTML = "";
+        desc.innerHTML = "";
+        err.innerHTML = data.error;
+      } else {
+        loc.innerHTML = data.location;
+        temperature.innerHTML = data.forecastData.temperature + "°C";
+        feelslike.innerHTML =
+          "Feels like " + data.forecastData.feelslike + "°C";
+        desc.innerHTML = data.forecastData.weatherDescription;
+      }
+    });
+  });
 
   search.value = "";
 });
